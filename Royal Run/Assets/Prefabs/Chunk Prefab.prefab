@@ -191,6 +191,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448a16e5c572a9b4f92d579b4e8c434b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fencePrefab: {fileID: 8597414459688550196, guid: e23a8881391b7d04e90486420216b82c, type: 3}
+  applePrefab: {fileID: 6065234206216596935, guid: aaed53982a1f30442a7c2536110c4745, type: 3}
+  coinPrefab: {fileID: 7154641064394157011, guid: 2324e67abac30c6479588302e0c014ae, type: 3}
+  appleSpawnChance: 0.3
+  coinSpawnChance: 0.3
+  lanes:
+  - -2.5
+  - 0
+  - 2.5
+  coinNumMax: 5
+  coinNumMin: 1
+  coinDistance: 2
 --- !u!1001 &1333293462278147855
 PrefabInstance:
   m_ObjectHideFlags: 0
