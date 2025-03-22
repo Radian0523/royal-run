@@ -197,9 +197,9 @@ MonoBehaviour:
   appleSpawnChance: 0.3
   coinSpawnChance: 0.3
   lanes:
-  - -2.5
+  - -3
   - 0
-  - 2.5
+  - 3
   coinNumMax: 5
   coinNumMin: 1
   coinDistance: 2

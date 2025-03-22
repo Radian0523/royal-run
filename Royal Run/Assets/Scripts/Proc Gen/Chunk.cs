@@ -51,7 +51,7 @@ public class Chunk : MonoBehaviour
         int selectedLane = SelectLane();
         for (int i = 0; i < coinsToSpawn; i++)
         {
-            float spawnPosZ = transform.position.z + ((i % 2 == 1) ? 1 : -1) * coinDistance * i;
+            float spawnPosZ = transform.position.z + ((i % 2 == 1) ? 1 : -1) * coinDistance * ((i == 0) ? 0 : ((i + 1) / 2));
             Vector3 spawnPos = new Vector3(lanes[selectedLane], transform.position.y, spawnPosZ);
             Instantiate(coinPrefab, spawnPos, Quaternion.identity, this.transform);
         }
