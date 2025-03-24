@@ -4,11 +4,13 @@ using UnityEngine.UIElements;
 
 public class LevelGenerator : MonoBehaviour
 {
+    [SerializeField] CameraController cameraController;
     [SerializeField] GameObject chunkPrefab;
     [SerializeField] int startingChunksAmount = 12;
     [SerializeField] Transform chunkParent;
     [SerializeField] float chunkLength = 10f;
     [SerializeField] float moveSpeed = 8f;
+    [SerializeField] float minMoveSpeed = 2f;
 
     // 配列よりも、リストの方が適している場合が多い。要素数は変数で良い。また、配列の長さは、名前.Countで得られる。
     // GameObject[] chunks = new GameObject[12];
@@ -21,6 +23,19 @@ public class LevelGenerator : MonoBehaviour
     void Update()
     {
         MoveChunks();
+    }
+
+    public void ChangeChunkMoveSpeed(float speedAmount)
+    {
+        moveSpeed = Mathf.Max(moveSpeed + speedAmount, minMoveSpeed);
+        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - speedAmount);
+        cameraController.ChangeCameraFOV(speedAmount);
+        // moveSpeed += speedAmount;
+        // if (moveSpeed < minMoveSpeed)
+        // {
+        //     moveSpeed = minMoveSpeed;
+        // }
+
     }
 
     void SpawnStartingChunks()
