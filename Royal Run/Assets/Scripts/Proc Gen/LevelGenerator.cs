@@ -4,13 +4,20 @@ using UnityEngine.UIElements;
 
 public class LevelGenerator : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] CameraController cameraController;
     [SerializeField] GameObject chunkPrefab;
-    [SerializeField] int startingChunksAmount = 12;
     [SerializeField] Transform chunkParent;
+
+    [Header("Level Settings")]
+    [SerializeField] int startingChunksAmount = 12;
+    [Tooltip("Do not change chunk length value unless chunk prefab size reflects change")]
     [SerializeField] float chunkLength = 10f;
     [SerializeField] float moveSpeed = 8f;
     [SerializeField] float minMoveSpeed = 2f;
+    [SerializeField] float maxMoveSpeed = 20f;
+    [SerializeField] float minGravityZ = -22f;
+    [SerializeField] float maxGravityZ = -2f;
 
     // 配列よりも、リストの方が適している場合が多い。要素数は変数で良い。また、配列の長さは、名前.Countで得られる。
     // GameObject[] chunks = new GameObject[12];
@@ -27,15 +34,18 @@ public class LevelGenerator : MonoBehaviour
 
     public void ChangeChunkMoveSpeed(float speedAmount)
     {
-        moveSpeed = Mathf.Max(moveSpeed + speedAmount, minMoveSpeed);
-        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - speedAmount);
-        cameraController.ChangeCameraFOV(speedAmount);
-        // moveSpeed += speedAmount;
-        // if (moveSpeed < minMoveSpeed)
-        // {
-        //     moveSpeed = minMoveSpeed;
-        // }
+        float newMoveSpeed = Mathf.Clamp(moveSpeed + speedAmount, minMoveSpeed, maxMoveSpeed);
 
+        if (newMoveSpeed != moveSpeed)
+        {
+            moveSpeed = newMoveSpeed;
+
+            float newGravityZ = Mathf.Clamp(Physics.gravity.z - speedAmount, minGravityZ, maxGravityZ);
+
+            Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, newGravityZ);
+
+            cameraController.ChangeCameraFOV(speedAmount);
+        }
     }
 
     void SpawnStartingChunks()
