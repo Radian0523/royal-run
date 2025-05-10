@@ -6,12 +6,14 @@ public class LevelGenerator : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] CameraController cameraController;
-    [SerializeField] GameObject chunkPrefab;
+    [SerializeField] GameObject[] chunkPrefabs;
+    [SerializeField] GameObject checkpointChunkPrefab;
     [SerializeField] Transform chunkParent;
     [SerializeField] ScoreManager scoreManager;
 
     [Header("Level Settings")]
     [SerializeField] int startingChunksAmount = 12;
+    [SerializeField] int checkpointChunkInterval = 8;
     [Tooltip("Do not change chunk length value unless chunk prefab size reflects change")]
     [SerializeField] float chunkLength = 10f;
     [SerializeField] float moveSpeed = 8f;
@@ -23,6 +25,8 @@ public class LevelGenerator : MonoBehaviour
     // 配列よりも、リストの方が適している場合が多い。要素数は変数で良い。また、配列の長さは、名前.Countで得られる。
     // GameObject[] chunks = new GameObject[12];
     List<GameObject> chunks = new List<GameObject>();
+    private uint chunksSpawned = 0;
+
     void Start()
     {
         SpawnStartingChunks();
@@ -59,11 +63,21 @@ public class LevelGenerator : MonoBehaviour
 
     void SpawnChunk()
     {
+        chunksSpawned++;
         float spawnPositionZ = CalculateSpawnPositionZ();
         Vector3 chunkSpawnPos = new Vector3(transform.position.x, transform.position.y, spawnPositionZ);
-        GameObject newChunkGO = Instantiate(chunkPrefab, chunkSpawnPos, Quaternion.identity, chunkParent);
+        GameObject chunkToSpawn = ChooseChunkToSpawn();
+        GameObject newChunkGO = Instantiate(chunkToSpawn, chunkSpawnPos, Quaternion.identity, chunkParent);
         chunks.Add(newChunkGO);
         newChunkGO.GetComponent<Chunk>().Init(this, scoreManager);
+    }
+
+    private GameObject ChooseChunkToSpawn()
+    {
+        int randomIndex = Random.Range(0, chunkPrefabs.Length);
+        GameObject chunkToSpawn = chunkPrefabs[randomIndex];
+        if (chunksSpawned % checkpointChunkInterval == 0) chunkToSpawn = checkpointChunkPrefab;
+        return chunkToSpawn;
     }
 
     private float CalculateSpawnPositionZ()
