@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class Apple : Pickup
 {
-    LevelGenerator levelGenerator;
     [SerializeField] float adjustChangeMoveSpeedAmount = 3f;
+    LevelGenerator levelGenerator;
 
-    void Start()
+    // このオブジェクトをInstantiateするときに、呼ぶ。その先になければ、その先でも同じことをする。
+    public void Init(LevelGenerator levelGenerator)
     {
-        levelGenerator = FindFirstObjectByType<LevelGenerator>();
+        this.levelGenerator = levelGenerator;
     }
+
     protected override void OnPickup()
     {
         Debug.Log("Power Up!");

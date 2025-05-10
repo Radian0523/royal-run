@@ -151,6 +151,7 @@ MonoBehaviour:
   cameraController: {fileID: 564137180}
   chunkPrefab: {fileID: 5559775035898672846, guid: db1c36bc40cabe943b62eb3c97baab74, type: 3}
   chunkParent: {fileID: 1046543150}
+  scoreManager: {fileID: 243381936}
   startingChunksAmount: 12
   chunkLength: 10
   moveSpeed: 8
@@ -297,7 +298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1446398139}
-  scorePerCoin: 100
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
