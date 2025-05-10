@@ -10,6 +10,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] GameObject checkpointChunkPrefab;
     [SerializeField] Transform chunkParent;
     [SerializeField] ScoreManager scoreManager;
+    [SerializeField] GameManager gameManager;
 
     [Header("Level Settings")]
     [SerializeField] int startingChunksAmount = 12;
@@ -70,6 +71,7 @@ public class LevelGenerator : MonoBehaviour
         GameObject newChunkGO = Instantiate(chunkToSpawn, chunkSpawnPos, Quaternion.identity, chunkParent);
         chunks.Add(newChunkGO);
         newChunkGO.GetComponent<Chunk>().Init(this, scoreManager);
+        newChunkGO.GetComponent<Checkpoint>()?.Init(gameManager);
     }
 
     private GameObject ChooseChunkToSpawn()

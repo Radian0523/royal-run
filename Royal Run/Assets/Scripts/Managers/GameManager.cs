@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void IncreaseTime(float amount)
+    {
+        timeLeft += amount;
+    }
+
     private bool DecreaseTime()
     {
         if (gameOver) return false;
