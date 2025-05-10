@@ -1,10 +1,12 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] obstaclePrefabs;
     [SerializeField] float obstacleSpawnTime = 1f;
+    [SerializeField] float minObstacleSpawnTime = 0.02f;
     [SerializeField] Transform obstacleParent;
     [SerializeField] float spawnWidth = 4f;
 
@@ -14,6 +16,12 @@ public class ObstacleSpawner : MonoBehaviour
         StartCoroutine(SpawnObstacleRoutine());
 
 
+    }
+
+    public void DecreaseObstacleSpawnTimeInterval(float amount)
+    {
+        obstacleSpawnTime += amount;
+        obstacleSpawnTime = Mathf.Max(obstacleSpawnTime, minObstacleSpawnTime);
     }
 
     IEnumerator SpawnObstacleRoutine()

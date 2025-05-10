@@ -11,6 +11,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] Transform chunkParent;
     [SerializeField] ScoreManager scoreManager;
     [SerializeField] GameManager gameManager;
+    [SerializeField] ObstacleSpawner obstacleSpawner;
+    [SerializeField] PlayerController player;
 
     [Header("Level Settings")]
     [SerializeField] int startingChunksAmount = 12;
@@ -22,6 +24,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] float maxMoveSpeed = 20f;
     [SerializeField] float minGravityZ = -22f;
     [SerializeField] float maxGravityZ = -2f;
+    [SerializeField] float playerSpeedModifier = 0.2f;
 
     // 配列よりも、リストの方が適している場合が多い。要素数は変数で良い。また、配列の長さは、名前.Countで得られる。
     // GameObject[] chunks = new GameObject[12];
@@ -51,6 +54,8 @@ public class LevelGenerator : MonoBehaviour
             Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, newGravityZ);
 
             cameraController.ChangeCameraFOV(speedAmount);
+
+            player.ChangePlayerSpeed(speedAmount * playerSpeedModifier);
         }
     }
 
@@ -71,7 +76,7 @@ public class LevelGenerator : MonoBehaviour
         GameObject newChunkGO = Instantiate(chunkToSpawn, chunkSpawnPos, Quaternion.identity, chunkParent);
         chunks.Add(newChunkGO);
         newChunkGO.GetComponent<Chunk>().Init(this, scoreManager);
-        newChunkGO.GetComponent<Checkpoint>()?.Init(gameManager);
+        newChunkGO.GetComponent<Checkpoint>()?.Init(gameManager, obstacleSpawner);
     }
 
     private GameObject ChooseChunkToSpawn()

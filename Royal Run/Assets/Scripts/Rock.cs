@@ -17,6 +17,7 @@ public class Rock : MonoBehaviour
     {
         cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         startingScale = transform.localScale.x;
+        collisionTimer = collisionCooldown; // 最初鳴らすため
     }
 
     void Update()

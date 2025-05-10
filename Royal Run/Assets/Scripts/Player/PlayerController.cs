@@ -12,9 +12,15 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
     private void FixedUpdate()
     {
         HandleMovement();
+    }
+
+    public void ChangePlayerSpeed(float amount)
+    {
+        moveSpeed += amount;
     }
 
     private void HandleMovement()

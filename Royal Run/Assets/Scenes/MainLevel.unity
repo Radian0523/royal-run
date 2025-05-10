@@ -158,14 +158,17 @@ MonoBehaviour:
   chunkParent: {fileID: 1046543150}
   scoreManager: {fileID: 243381936}
   gameManager: {fileID: 243381937}
+  obstacleSpawner: {fileID: 1569964744}
+  player: {fileID: 499062975}
   startingChunksAmount: 12
   checkpointChunkInterval: 8
   chunkLength: 10
-  moveSpeed: 8
+  moveSpeed: 6
   minMoveSpeed: 2
   maxMoveSpeed: 20
   minGravityZ: -22
-  maxGravityZ: -2
+  maxGravityZ: -8
+  playerSpeedModifier: 0.2
 --- !u!4 &35564634
 Transform:
   m_ObjectHideFlags: 0
@@ -322,7 +325,7 @@ MonoBehaviour:
   playerController: {fileID: 499062975}
   timeText: {fileID: 629600206}
   gameOverText: {fileID: 2051336732}
-  startTime: 10
+  startTime: 30
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,8 +949,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 12
-      minScalar: 8
+      scalar: 100
+      minScalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1263,7 +1266,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 5000
+    maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -1529,7 +1532,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 900
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10830,8 +10833,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -11289,7 +11292,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0000
+  m_text: 000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11316,8 +11319,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -11407,6 +11410,7 @@ MonoBehaviour:
   - {fileID: 5717171474575304480, guid: 7b07cb216a7e25b45b7a0294175ae3ce, type: 3}
   - {fileID: 5717171474575304480, guid: 018e3b30b523eef41960757e3935364a, type: 3}
   obstacleSpawnTime: 3
+  minObstacleSpawnTime: 0.02
   obstacleParent: {fileID: 1046543150}
   spawnWidth: 4
 --- !u!4 &1569964745
@@ -11773,8 +11777,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 12
-      minScalar: 8
+      scalar: 100
+      minScalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -12090,7 +12094,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 5000
+    maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -12356,7 +12360,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 900
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2

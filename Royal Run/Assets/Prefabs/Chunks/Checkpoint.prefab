@@ -712,7 +712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf402d77a2a39341ba731d862344206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToIncrease: 5
+  timeToIncrease: 4
+  intervalToDecrease: 0.02
 --- !u!65 &1636351951858030953
 BoxCollider:
   m_ObjectHideFlags: 0
